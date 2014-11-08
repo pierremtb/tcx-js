@@ -4,9 +4,13 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
  */
 
 (function() {
-  describe('Parser', function() {
+  var tcx;
+
+  tcx = require('../lib/tcx.js');
+
+  describe('tcx.Parser', function() {
     return it('defines VERSION', function() {
-      return expect(Parser.VERSION).toBe('0.0.1');
+      return expect(tcx.Parser.VERSION).toBe('0.0.1');
     });
   });
 

@@ -14,14 +14,6 @@ module.exports = function (grunt) {
           'examples.js':         ['test-src/examples.coffee']
         }
       }
-    },
-
-    jasmine : {
-      src : 'lib/tcx.js',
-      options : {
-        specs : 'test/*.js',
-        template: require('grunt-template-jasmine-requirejs')
-      }
     }
 
   };
@@ -29,5 +21,5 @@ module.exports = function (grunt) {
   grunt.initConfig(config);
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
-  grunt.registerTask('default', [ 'coffee', 'jasmine' ]);
+  grunt.registerTask('default', [ 'coffee' ]);
 };
