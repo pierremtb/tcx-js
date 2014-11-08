@@ -19,7 +19,8 @@ class Parser
 
   @VERSION: '0.0.1'
 
-  constructor: ->
+  constructor: (verbose=false) ->
+    @verbose    = verbose
     @parser     = new expat.Parser('UTF-8')
     @entries    = []
     @stack      = []
@@ -41,7 +42,7 @@ class Parser
 
     @parser.on('endElement', (name) =>
       p = this.curr_path()
-      console.log('end: ' + p + " -> " + @curr_text)
+      console.log('end: ' + p + " -> " + @curr_text) if @verbose
       switch p
         when "Activities"
           x = 0

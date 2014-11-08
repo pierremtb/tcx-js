@@ -23,7 +23,7 @@ console.log('tcx = require("tcx-js")')
 console.log('```')
 console.log('')
 
-parser = new tcx.Parser()
+parser = new tcx.Parser(true)
 #console.log('version: ' + parser.VERSION)
 parser.parse_file('data/activity_twin_cities_marathon.tcx')
 

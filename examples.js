@@ -41,7 +41,7 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
 
   console.log('');
 
-  parser = new tcx.Parser();
+  parser = new tcx.Parser(true);
 
   parser.parse_file('data/activity_twin_cities_marathon.tcx');
 
