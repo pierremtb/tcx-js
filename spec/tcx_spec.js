@@ -10,7 +10,8 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
 
   describe('tcx.Parser', function() {
     return it('defines VERSION', function() {
-      return expect(tcx.Parser.VERSION).toBe('0.0.1');
+      expect(tcx.Parser.VERSION).toBe('0.0.1');
+      return console.log('here');
     });
   });
 
