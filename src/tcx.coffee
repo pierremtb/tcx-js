@@ -20,146 +20,100 @@ class Parser
   @VERSION: '0.0.1'
 
   constructor: (verbose=false) ->
-    @verbose    = verbose
-    @parser     = new expat.Parser('UTF-8')
-    @entries    = []
-    @stack      = []
-    @curr_tag   = undefined
-    @curr_text  = ''
-    @curr_entry = undefined
-    @unique_paths = []
-    @end_reached  = false
-    @author     = {}
+    @verbose     = verbose
+    @parser      = new expat.Parser('UTF-8')
+    @tag_stack   = []
+    @paths       = []
+    @end_reached = false
+    @curr_tag    = undefined
+    @curr_text   = ''
+    @curr_tkpt   = undefined
+
+    # @activity contains the parsed data:
+    @activity = {}
+    @activity.creator = {}
+    @activity.author  = {}
+    @activity.trackpoints = []
 
     @parser.on('startElement', (name, attrs) =>
-      @stack.push(name)
+      @tag_stack.push(name)
       @curr_tag  = name
       @curr_text = ''
-      cp = this.curr_path()
-      @unique_paths.push(cp)
+      p = this.curr_path()
+
+      # this logic is for capturing/exploring the structure of the tcx/xml document
+      @paths.push(p)
       for n,v of attrs
-        @unique_paths.push(cp + '@' + n))
+        @paths.push(p + '@' + n)
+
+      switch p
+        when "Activities|Activity|Lap|Track|Trackpoint"
+          @curr_tkpt = {}
+          @activity.trackpoints.push(@curr_tkpt)
+    )
 
     @parser.on('endElement', (name) =>
       p = this.curr_path()
       console.log('end: ' + p + " -> " + @curr_text) if @verbose
       switch p
-        when "Activities"
-          x = 0
-        when "Activities|Activity"
-          x = 0
-        when "Activities|Activity@Sport"
-          x = 0
-        when "Activities|Activity|Creator"
-          x = 0
-        when "Activities|Activity|Creator@xsi:type"
-          x = 0
+        # Activity info
         when "Activities|Activity|Creator|Name"
-          x = 0
+          @activity.creator.name = @curr_text
         when "Activities|Activity|Creator|ProductID"
-          x = 0
+          @activity.creator.product_id = @curr_text
         when "Activities|Activity|Creator|UnitId"
-          x = 0
+          @activity.creator.unit_id = @curr_text
         when "Activities|Activity|Creator|Version"
-          x = 0
+          @activity.creator.version = @curr_text
         when "Activities|Activity|Creator|Version|BuildMajor"
-          x = 0
+          @activity.creator.build_major = @curr_text
         when "Activities|Activity|Creator|Version|BuildMinor"
-          x = 0
+          @activity.creator.build_minor = @curr_text
         when "Activities|Activity|Creator|Version|VersionMajor"
-          x = 0
+          @activity.creator.version_major = @curr_text
         when "Activities|Activity|Creator|Version|VersionMinor"
-          x = 0
+          @activity.creator.version_minor = @curr_text
         when "Activities|Activity|Id"
-          x = 0
-        when "Activities|Activity|Lap"
-          x = 0
-        when "Activities|Activity|Lap@StartTime"
-          x = 0
-        when "Activities|Activity|Lap|AverageHeartRateBpm"
-          x = 0
-        when "Activities|Activity|Lap|AverageHeartRateBpm|Value"
-          x = 0
-        when "Activities|Activity|Lap|Calories"
-          x = 0
-        when "Activities|Activity|Lap|DistanceMeters"
-          x = 0
-        when "Activities|Activity|Lap|Extensions"
-          x = 0
-        when "Activities|Activity|Lap|Extensions|LX"
-          x = 0
-        when "Activities|Activity|Lap|Extensions|LX@xmlns"
-          x = 0
-        when "Activities|Activity|Lap|Extensions|LX|AvgRunCadence"
-          x = 0
-        when "Activities|Activity|Lap|Extensions|LX|AvgSpeed"
-          x = 0
-        when "Activities|Activity|Lap|Extensions|LX|MaxRunCadence"
-          x = 0
-        when "Activities|Activity|Lap|Extensions|LX|Steps"
-          x = 0
-        when "Activities|Activity|Lap|Intensity"
-          x = 0
-        when "Activities|Activity|Lap|MaximumHeartRateBpm"
-          x = 0
-        when "Activities|Activity|Lap|MaximumHeartRateBpm|Value"
-          x = 0
-        when "Activities|Activity|Lap|MaximumSpeed"
-          x = 0
-        when "Activities|Activity|Lap|TotalTimeSeconds"
-          x = 0
-        when "Activities|Activity|Lap|Track"
-          x = 0
-        when "Activities|Activity|Lap|Track|Trackpoint"
-          x = 0
+          @activity.id = @curr_text
+
+        # Trackpoints
         when "Activities|Activity|Lap|Track|Trackpoint|AltitudeMeters"
-          x = 0
+          @curr_tkpt.alt_meters = @curr_text
         when "Activities|Activity|Lap|Track|Trackpoint|DistanceMeters"
-          x = 0
-        when "Activities|Activity|Lap|Track|Trackpoint|Extensions"
-          x = 0
-        when "Activities|Activity|Lap|Track|Trackpoint|Extensions|TPX"
-          x = 0
-        when "Activities|Activity|Lap|Track|Trackpoint|Extensions|TPX@xmlns"
-          x = 0
+          @curr_tkpt.dist_meters = @curr_text
         when "Activities|Activity|Lap|Track|Trackpoint|Extensions|TPX|RunCadence"
-          x = 0
-        when "Activities|Activity|Lap|Track|Trackpoint|Extensions|TPX|Speed"
-          x = 0
-        when "Activities|Activity|Lap|Track|Trackpoint|HeartRateBpm"
-          x = 0
+          @curr_tkpt.run_cadence = @curr_text
         when "Activities|Activity|Lap|Track|Trackpoint|HeartRateBpm|Value"
-          x = 0
-        when "Activities|Activity|Lap|Track|Trackpoint|Position"
-          x = 0
+          @curr_tkpt.hr_bpm = @curr_text
         when "Activities|Activity|Lap|Track|Trackpoint|Position|LatitudeDegrees"
-          x = 0
+          @curr_tkpt.lat = @curr_text
         when "Activities|Activity|Lap|Track|Trackpoint|Position|LongitudeDegrees"
-          x = 0
+          @curr_tkpt.lng = @curr_text
         when "Activities|Activity|Lap|Track|Trackpoint|Time"
-          x = 0
+          @curr_tkpt.time = @curr_text
         when "Activities|Activity|Lap|TriggerMethod"
           x = 0
 
+        # Author info
         when "Author|Build|Version|BuildMajor"
-          @author.build_major = @curr_text
+          @activity.author.build_major = @curr_text
         when "Author|Build|Version|BuildMinor"
-          @author.build_minor = @curr_text
+          @activity.author.build_minor = @curr_text
         when "Author|Build|Version|VersionMajor"
-          @author.version_major = @curr_text
+          @activity.author.version_major = @curr_text
         when "Author|Build|Version|VersionMinor"
-          @author.version_minor = @curr_text
+          @activity.author.version_minor = @curr_text
         when "Author|LangID"
-          @author.lang = @curr_text
+          @activity.author.lang = @curr_text
         when "Author|Name"
-          @author.name = @curr_text
+          @activity.author.name = @curr_text
         when "Author|PartNumber"
-          @author.part_number = @curr_text
+          @activity.author.part_number = @curr_text
 
-      @stack.pop()
+      @tag_stack.pop()
       @curr_tag  = undefined
       @curr_text = ''
-      if name == @stack[0]
+      if name == @tag_stack[0]
         @end_reached = true
     )
 
@@ -174,16 +128,16 @@ class Parser
     @parser.parse(xml_str)
 
   curr_path: ->
-    @stack.slice(1).join('|')
+    @tag_stack.slice(1).join('|')
 
   curr_full_path: ->
-    @stack.join('|')
+    @tag_stack.join('|')
 
   curr_depth: ->
-    @stack.length
+    @tag_stack.length
 
   log_unique_paths: ->
-    sorted = @unique_paths.slice(0).sort()
+    sorted = @paths.slice(0).sort()
     prev = ''
     for path in sorted
       if path != prev

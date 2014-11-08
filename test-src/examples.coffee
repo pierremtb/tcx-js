@@ -35,7 +35,10 @@ parser.parse_file('data/activity_twin_cities_marathon.tcx')
 #     console.log('  when "' + p + '"')
 #     console.log('    x = 0')
 
-console.log('author: ' + JSON.stringify(parser.author))
+for tkpt in parser.activity.trackpoints
+  console.log('tkpt: ' + JSON.stringify(tkpt))
+
+console.log(JSON.stringify(parser.activity, null, 2))
 console.log('```')
 console.log('```')
 console.log('')
