@@ -1,0 +1,41 @@
+{
+  "name":    "tcx-js",
+  "version": "0.0.1",
+  "description": "A Node.js library for parsing TCX/XML files, such as from a Garmin GPS device.",
+  "homepage": "https://github.com/cjoakim/tcx-js",
+  "main": "lib/tcx.js",
+  "author": {
+    "name": "Chris Joakim, JoakimSoftware LLC",
+    "url":  "http://www.chrisjoakim.com"
+  },
+  "licenses": [
+    {
+      "type": "ISC",
+      "url":  "https://github.com/cjoakim/tcx-js/blob/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url":  "https://github.com/cjoakim/tcx-js"
+  },
+  "dependencies": {
+    "node-expat":"~2.3.2",
+    "m26-js":"~0.1.5",
+    "sb-js":"~0.1.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-coffee": "~0.12.0",
+    "grunt-contrib-jasmine": "~0.8.1",
+    "grunt-template-jasmine-requirejs": "~0.2.0"
+  },
+  "scripts": {
+    "test": "grunt jasmine"
+  },
+  "keywords": [
+    "tcx",
+    "garmin",
+    "forerunner",
+    "gps"
+  ]
+}
