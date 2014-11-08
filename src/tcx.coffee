@@ -63,8 +63,6 @@ class Parser
           @activity.creator.product_id = @curr_text
         when "Activities|Activity|Creator|UnitId"
           @activity.creator.unit_id = @curr_text
-        when "Activities|Activity|Creator|Version"
-          @activity.creator.version = @curr_text
         when "Activities|Activity|Creator|Version|BuildMajor"
           @activity.creator.build_major = @curr_text
         when "Activities|Activity|Creator|Version|BuildMinor"

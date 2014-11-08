@@ -9,4 +9,4 @@ and heart-rate monitoring data.
 
 ### Release History
 
-* 2014-11-08   v0.0.1  alpha 1
+* 2014-11-09   v0.0.1  alpha 1

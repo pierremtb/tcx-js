@@ -7,7 +7,9 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
  */
 
 (function() {
-  var parser, tcx, tkpt, _i, _len, _ref;
+  var filename, fs, parser, tcx;
+
+  fs = require('fs');
 
   tcx = require("./lib/tcx.js");
 
@@ -41,17 +43,15 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
 
   console.log('');
 
-  parser = new tcx.Parser(true);
+  parser = new tcx.Parser(false);
 
   parser.parse_file('data/activity_twin_cities_marathon.tcx');
 
-  _ref = parser.activity.trackpoints;
-  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-    tkpt = _ref[_i];
-    console.log('tkpt: ' + JSON.stringify(tkpt));
-  }
+  filename = 'data/activity_twin_cities_marathon.json';
 
-  console.log(JSON.stringify(parser.activity, null, 2));
+  fs.writeFileSync(filename, JSON.stringify(parser.activity, null, 2));
+
+  console.log('file written: ' + filename);
 
   console.log('```');
 
