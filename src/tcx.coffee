@@ -28,6 +28,7 @@ class Parser
     @curr_entry = undefined
     @unique_paths = []
     @end_reached  = false
+    @author     = {}
 
     @parser.on('startElement', (name, attrs) =>
       @stack.push(name)
@@ -39,14 +40,8 @@ class Parser
         @unique_paths.push(cp + '@' + n))
 
     @parser.on('endElement', (name) =>
-      @stack.pop()
-      @curr_tag  = undefined
-      @curr_text = ''
-      if name == @stack[0]
-        @end_reached = true
-
-      p = 'xxx'
-
+      p = this.curr_path()
+      console.log('end: ' + p + " -> " + @curr_text)
       switch p
         when "Activities"
           x = 0
@@ -144,26 +139,27 @@ class Parser
           x = 0
         when "Activities|Activity|Lap|TriggerMethod"
           x = 0
-        when "Author"
-          x = 0
-        when "Author|Build"
-          x = 0
-        when "Author|Build|Version"
-          x = 0
+
         when "Author|Build|Version|BuildMajor"
-          x = 0
+          @author.build_major = @curr_text
         when "Author|Build|Version|BuildMinor"
-          x = 0
+          @author.build_minor = @curr_text
         when "Author|Build|Version|VersionMajor"
-          x = 0
+          @author.version_major = @curr_text
         when "Author|Build|Version|VersionMinor"
-          x = 0
+          @author.version_minor = @curr_text
         when "Author|LangID"
-          x = 0
+          @author.lang = @curr_text
         when "Author|Name"
-          x = 0
+          @author.name = @curr_text
         when "Author|PartNumber"
-          x = 0
+          @author.part_number = @curr_text
+
+      @stack.pop()
+      @curr_tag  = undefined
+      @curr_text = ''
+      if name == @stack[0]
+        @end_reached = true
     )
 
     @parser.on('text', (text) =>

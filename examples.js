@@ -7,7 +7,7 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
  */
 
 (function() {
-  var p, parser, prev, tcx, _i, _len, _ref;
+  var parser, tcx;
 
   tcx = require("./lib/tcx.js");
 
@@ -45,19 +45,7 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
 
   parser.parse_file('data/activity_twin_cities_marathon.tcx');
 
-  console.log('switch path');
-
-  prev = '';
-
-  _ref = parser.unique_paths.sort();
-  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-    p = _ref[_i];
-    if (p !== prev) {
-      prev = p;
-      console.log('  when "' + p + '"');
-      console.log('    x = 0');
-    }
-  }
+  console.log('author: ' + JSON.stringify(parser.author));
 
   console.log('```');
 

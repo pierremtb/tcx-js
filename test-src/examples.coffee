@@ -27,14 +27,15 @@ parser = new tcx.Parser()
 #console.log('version: ' + parser.VERSION)
 parser.parse_file('data/activity_twin_cities_marathon.tcx')
 
-console.log('switch path')
-prev = ''
-for p in parser.unique_paths.sort()
-  if p != prev
-    prev = p
-    console.log('  when "' + p + '"')
-    console.log('    x = 0')
+# console.log('switch path')
+# prev = ''
+# for p in parser.unique_paths.sort()
+#   if p != prev
+#     prev = p
+#     console.log('  when "' + p + '"')
+#     console.log('    x = 0')
 
+console.log('author: ' + JSON.stringify(parser.author))
 console.log('```')
 console.log('```')
 console.log('')
