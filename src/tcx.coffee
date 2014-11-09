@@ -133,10 +133,8 @@ class Parser
 
   finish: ->
     # Augment the parsed Trackpoint data with calculated fields
-    console.log(JSON.stringify(@options))
     for tkpt, idx in @activity.trackpoints
       tkpt.seq = idx + 1
-
       if @options.alt_feet == true
         altm  = Number(tkpt.alt_meters)
         tkpt.alt_feet = Parser.FEET_PER_METER * altm

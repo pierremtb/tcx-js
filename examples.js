@@ -133,13 +133,19 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
 
   console.log('#### Parse, with Augmented Calculated fields');
 
+  console.log('');
+
+  console.log("tcx-js will optionally calculate and add the 'alt_feet' and 'dist_miles' fields to ");
+
+  console.log('each trackpoint, if you configure the parser as follows: ');
+
+  console.log('');
+
   opts = {};
 
   opts.alt_feet = true;
 
   opts.dist_miles = true;
-
-  console.log('opts.xxx -> ' + opts.alt_feet);
 
   p2 = new tcx.Parser(opts);
 
@@ -149,17 +155,41 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
 
   t2 = a2.trackpoints;
 
-  console.log(JSON.stringify(t2[t2.length - 1], null, 2));
+  console.log('```');
+
+  console.log('opts = {}');
+
+  console.log('opts.alt_feet = true');
+
+  console.log('opts.dist_miles = true');
 
   console.log('');
 
-  console.log('The version number of this library can be determined at runtime.');
+  console.log('p2 = new tcx.Parser(opts)');
+
+  console.log('p2.parse_file("data/activity_twin_cities_marathon.tcx")');
+
+  console.log('a2 = p2.activity');
+
+  console.log('t2 = a2.trackpoints');
+
+  console.log("console.log(JSON.stringify(t2[t2.length - 1], null, 2)) -> \n" + JSON.stringify(t2[t2.length - 1], null, 2));
+
+  console.log('```');
+
+  console.log('');
+
+  console.log('The version number of this library, and other constant values, can be determined at runtime.');
 
   console.log('');
 
   console.log('```');
 
-  console.log('Parser.VERSION  -> ' + tcx.Parser.VERSION);
+  console.log('Parser.VERSION         -> ' + tcx.Parser.VERSION);
+
+  console.log('Parser.FEET_PER_METER  -> ' + tcx.Parser.FEET_PER_METER);
+
+  console.log('Parser.METERS_PER_MILE -> ' + tcx.Parser.METERS_PER_MILE);
 
   console.log('```');
 

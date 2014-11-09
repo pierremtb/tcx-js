@@ -77,7 +77,8 @@ console.log(JSON.stringify(trackpoints[0], null, 2)) ->
   "alt_meters": "257.0",
   "dist_meters": "0.0",
   "hr_bpm": "85",
-  "run_cadence": "89"
+  "run_cadence": "89",
+  "seq": 1
 }
 
 console.log(JSON.stringify(trackpoints[trackpoints.length - 1], null, 2)) ->
@@ -88,18 +89,50 @@ console.log(JSON.stringify(trackpoints[trackpoints.length - 1], null, 2)) ->
   "alt_meters": "260.0",
   "dist_meters": "42635.44921875",
   "hr_bpm": "161",
-  "run_cadence": "77"
+  "run_cadence": "77",
+  "seq": 2256
 }
 ```
 
+#### Parse, with Augmented Calculated fields
 
-The version number of this library can be determined at runtime.
+tcx-js will optionally calculate and add the 'alt_feet' and 'dist_miles' fields to
+each trackpoint, if you configure the parser as follows:
 
 ```
-Parser.VERSION  -> 0.1.0
+opts = {}
+opts.alt_feet = true
+opts.dist_miles = true
+
+p2 = new tcx.Parser(opts)
+p2.parse_file("data/activity_twin_cities_marathon.tcx")
+a2 = p2.activity
+t2 = a2.trackpoints
+console.log(JSON.stringify(t2[t2.length - 1], null, 2)) ->
+{
+  "time": "2014-10-05T17:22:17.000Z",
+  "lat": "44.95180849917233",
+  "lng": "-93.10493202880025",
+  "alt_meters": "260.0",
+  "dist_meters": "42635.44921875",
+  "hr_bpm": "161",
+  "run_cadence": "77",
+  "seq": 2256,
+  "alt_feet": 853.018372703412,
+  "dist_miles": 26.492439912628996
+}
+```
+
+The version number of this library, and other constant values, can be determined at runtime.
+
+```
+Parser.VERSION         -> 0.1.1
+Parser.FEET_PER_METER  -> 3.280839895013123
+Parser.METERS_PER_MILE -> 1609.344
 ```
 
 ### Release History
 
+* 2014-11-09   v0.1.1  Added optional calculated Trackpoint fields 'alt_feet' and 'dist_miles'.
 * 2014-11-09   v0.1.0  Initial working version.
 * 2014-11-09   v0.0.1  alpha 1

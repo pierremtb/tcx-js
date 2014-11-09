@@ -1,7 +1,10 @@
+
 *.tgz
 *.txt
+
 build.xml
 examples.js
+formula.rb
 Gruntfile.js
 
 data/

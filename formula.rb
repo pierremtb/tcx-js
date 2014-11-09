@@ -11,8 +11,9 @@ yds_per_km   = miles_per_km * (5280.0 / 3.0)
 feet_per_m   = feet_per_km / 1000.0
 
 puts "meters_per_imperial_mile:  #{meters_per_imperial_mile}"
-puts "km_per_mile:  #{km_per_mile}"
-puts "miles_per_km: #{miles_per_km}"
-puts "yds_per_km:   #{yds_per_km}"
-puts "feet_per_km:  #{feet_per_km}"
-puts "feet_per_m:   #{feet_per_m}"
+puts "km_per_mile:    #{km_per_mile}"
+puts "miles_per_km:   #{miles_per_km}"
+puts "yds_per_km:     #{yds_per_km}"
+puts "feet_per_km:    #{feet_per_km}"
+puts "feet_per_m:     #{feet_per_m}"
+puts "miles in a 10K: #{miles_per_km * 10.0}"
