@@ -73,6 +73,20 @@ console.log("console.log(JSON.stringify(trackpoints[trackpoints.length - 1], nul
 console.log('```')
 console.log('')
 
+console.log('#### Parse, with Augmented Calculated fields')
+
+opts = {}
+opts.alt_feet = true
+opts.dist_miles = true
+
+console.log('opts.xxx -> ' + opts.alt_feet)
+p2 = new tcx.Parser(opts)
+p2.parse_file("data/activity_twin_cities_marathon.tcx")
+a2 = p2.activity
+t2 = a2.trackpoints
+console.log(JSON.stringify(t2[t2.length - 1], null, 2) )
+
+
 console.log('')
 console.log('The version number of this library can be determined at runtime.')
 console.log('')

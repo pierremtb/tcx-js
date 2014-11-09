@@ -9,11 +9,14 @@ root = exports ? this
 
 class Parser
 
-  @VERSION: '0.1.1'
+  @VERSION:        '0.1.1'
+  @FEET_PER_METER:  3.280839895013123
+  @METERS_PER_MILE: 1609.344
 
-  constructor: (verbose=false) ->
-    @verbose     = verbose
+  constructor: (opts={}) ->
+    @options     = opts
     @parser      = new expat.Parser('UTF-8')
+    @root_tag    = undefined
     @tag_stack   = []
     @paths       = []
     @end_reached = false
@@ -28,6 +31,8 @@ class Parser
     @activity.trackpoints = []
 
     @parser.on('startElement', (name, attrs) =>
+      if @tag_stack.length == 0
+        @root_tag = name
       @tag_stack.push(name)
       @curr_tag  = name
       @curr_text = ''
@@ -46,7 +51,6 @@ class Parser
 
     @parser.on('endElement', (name) =>
       p = this.curr_path()
-      console.log('end: ' + p + " -> " + @curr_text) if @verbose
       switch p
         # Activity & Creator info
         when "Activities|Activity|Creator|Name"
@@ -103,8 +107,9 @@ class Parser
       @tag_stack.pop()
       @curr_tag  = undefined
       @curr_text = ''
-      if name == @tag_stack[0]
+      if name == @root_tag
         @end_reached = true
+        this.finish()
     )
 
     @parser.on('text', (text) =>
@@ -126,5 +131,17 @@ class Parser
   curr_depth: ->
     @tag_stack.length
 
+  finish: ->
+    # Augment the parsed Trackpoint data with calculated fields
+    console.log(JSON.stringify(@options))
+    for tkpt, idx in @activity.trackpoints
+      tkpt.seq = idx + 1
+
+      if @options.alt_feet == true
+        altm  = Number(tkpt.alt_meters)
+        tkpt.alt_feet = Parser.FEET_PER_METER * altm
+      if @options.dist_miles == true
+        distm = Number(tkpt.dist_meters)
+        tkpt.dist_miles = distm / Parser.METERS_PER_MILE
 
 root.Parser = Parser
