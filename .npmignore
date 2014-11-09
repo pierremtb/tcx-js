@@ -4,6 +4,7 @@ build.xml
 examples.js
 Gruntfile.js
 
+data/
+spec/
 src/
-test/
 test-src/

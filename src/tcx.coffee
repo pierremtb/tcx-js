@@ -48,7 +48,7 @@ class Parser
       p = this.curr_path()
       console.log('end: ' + p + " -> " + @curr_text) if @verbose
       switch p
-        # Activity info
+        # Activity & Creator info
         when "Activities|Activity|Creator|Name"
           @activity.creator.name = @curr_text
         when "Activities|Activity|Creator|ProductID"
@@ -113,10 +113,6 @@ class Parser
     @parser.on('error', (error) =>
       console.log('error ' + JSON.stringify(error)))
 
-
-  a: ->
-    @activity
-
   parse_file: (filename) =>
     xml_str = fs.readFileSync(filename)
     @parser.parse(xml_str)
@@ -130,12 +126,5 @@ class Parser
   curr_depth: ->
     @tag_stack.length
 
-  log_unique_paths: ->
-    sorted = @paths.slice(0).sort()
-    prev = ''
-    for path in sorted
-      if path != prev
-        prev = path
-        console.log('unique_path: ' + path)
 
 root.Parser = Parser

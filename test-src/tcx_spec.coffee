@@ -23,7 +23,7 @@ describe 'tcx.Parser', ->
     creator  = activity.creator
     trackpoints = activity.trackpoints
 
-   # console.log(JSON.stringify(creator, null, 2))
+    # Creator
     expect(creator.name).toBe('Garmin Forerunner 620')
     expect(creator.unit_id).toBe('3875991210')
     expect(creator.product_id).toBe('1623')
@@ -32,7 +32,7 @@ describe 'tcx.Parser', ->
     expect(creator.build_major).toBe('0')
     expect(creator.build_minor).toBe('0')
 
-    # console.log(JSON.stringify(author, null, 2))
+    # Author
     expect(author.name).toBe('Garmin Connect API')
     expect(author.version_major).toBe('14')
     expect(author.version_minor).toBe('10')
@@ -41,9 +41,7 @@ describe 'tcx.Parser', ->
     expect(author.lang).toBe('en')
     expect(author.part_number).toBe('006-D2449-00')
 
-    # console.log(trackpoints.length)
-    # console.log(JSON.stringify(trackpoints[2255], null, 2))
-    # cat data/activity_twin_cities_marathon.tcx | grep '<Trackpoint>' | wc  ->  2256 2256 51888
+    # Trackpoints
     expect(trackpoints.length).toBe(2256)
 
     t = trackpoints[0]
