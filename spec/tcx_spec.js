@@ -4,13 +4,20 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
  */
 
 (function() {
-  var tcx;
+  var pkg, tcx;
 
   tcx = require('../lib/tcx.js');
 
+  pkg = require('../package.json');
+
   describe('tcx.Parser', function() {
     it('defines VERSION', function() {
-      return expect(tcx.Parser.VERSION).toBe('0.1.0');
+      var code_version, expected, pkg_version;
+      expected = '0.1.1';
+      code_version = tcx.Parser.VERSION;
+      pkg_version = pkg.version;
+      expect(code_version).toBe(expected);
+      return expect(code_version).toBe(expected);
     });
     return it('parses the Twin Cities Marathon sample data, quickly', function() {
       var activity, author, creator, elapsed_ms, finish_ms, parser, start_ms, t, trackpoints;

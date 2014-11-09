@@ -3,11 +3,16 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
 ###
 
 tcx = require('../lib/tcx.js')
+pkg = require('../package.json')
 
 describe 'tcx.Parser', ->
 
   it 'defines VERSION', ->
-    expect(tcx.Parser.VERSION).toBe('0.1.0')
+    expected = '0.1.1'
+    code_version = tcx.Parser.VERSION
+    pkg_version  = pkg.version
+    expect(code_version).toBe(expected)
+    expect(code_version).toBe(expected)
 
   it 'parses the Twin Cities Marathon sample data, quickly', ->
 

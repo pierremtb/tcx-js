@@ -1,6 +1,6 @@
 {
   "name":    "tcx-js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A Node.js library for parsing TCX/XML files, such as from a Garmin GPS device.",
   "homepage": "https://github.com/cjoakim/tcx-js",
   "main": "lib/tcx.js",

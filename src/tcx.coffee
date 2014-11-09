@@ -9,7 +9,7 @@ root = exports ? this
 
 class Parser
 
-  @VERSION: '0.1.0'
+  @VERSION: '0.1.1'
 
   constructor: (verbose=false) ->
     @verbose     = verbose
