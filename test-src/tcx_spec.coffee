@@ -7,7 +7,7 @@ tcx = require('../lib/tcx.js')
 describe 'tcx.Parser', ->
 
   it 'defines VERSION', ->
-    expect(tcx.Parser.VERSION).toBe('0.0.1')
+    expect(tcx.Parser.VERSION).toBe('0.1.0')
 
   it 'parses the Twin Cities Marathon sample data, quickly', ->
 

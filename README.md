@@ -23,27 +23,45 @@ tcx = require("tcx-js")
 Parsing elapsed time is typically sub-second, even for a marathon run.
 The tcx-js Parser uses the 'node-expat' library, and the SAX API, for speed and performance.
 
+Note: this library is implemented with CoffeeScript, and these examples are also in CoffeeScript.
+
 ```
 parser = new tcx.Parser()
 parser.parse_file("data/activity_twin_cities_marathon.tcx")
 activity = parser.activity
 creator  = activity.creator
-author   = activity.author   #
+author   = activity.author
 trackpoints = activity.trackpoints
 ```
 
 "creator" is the device that recorded the data
 
 ```
-console.log(JSON.stringify(creator)) ->
-{"name":"Garmin Forerunner 620","unit_id":"3875991210","product_id":"1623","version_major":"3","version_minor":"0","build_major":"0","build_minor":"0"}
+console.log(JSON.stringify(creator, null, 2)) ->
+{
+  "name": "Garmin Forerunner 620",
+  "unit_id": "3875991210",
+  "product_id": "1623",
+  "version_major": "3",
+  "version_minor": "0",
+  "build_major": "0",
+  "build_minor": "0"
+}
 ```
 
 "author" is what created the tcx/xml file
 
 ```
-console.log(JSON.stringify(author)) ->
-{"name":"Garmin Connect API","version_major":"14","version_minor":"10","build_major":"0","build_minor":"0","lang":"en","part_number":"006-D2449-00"}
+console.log(JSON.stringify(author, null, 2)) ->
+{
+  "name": "Garmin Connect API",
+  "version_major": "14",
+  "version_minor": "10",
+  "build_major": "0",
+  "build_minor": "0",
+  "lang": "en",
+  "part_number": "006-D2449-00"
+}
 ```
 
 "trackpoints" is an Array of the recorded data points
@@ -78,9 +96,10 @@ console.log(JSON.stringify(trackpoints[trackpoints.length - 1], null, 2)) ->
 The version number of this library can be determined at runtime.
 
 ```
-Parser.VERSION  -> 0.0.1
+Parser.VERSION  -> 0.1.0
 ```
 
 ### Release History
 
+* 2014-11-09   v0.1.0  Initial working version.
 * 2014-11-09   v0.0.1  alpha 1

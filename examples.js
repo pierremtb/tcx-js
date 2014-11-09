@@ -53,6 +53,10 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
 
   console.log('');
 
+  console.log('Note: this library is implemented with CoffeeScript, and these examples are also in CoffeeScript.');
+
+  console.log('');
+
   console.log('```');
 
   parser = new tcx.Parser();
@@ -75,7 +79,7 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
 
   console.log('creator  = activity.creator');
 
-  console.log('author   = activity.author   # ');
+  console.log('author   = activity.author');
 
   console.log('trackpoints = activity.trackpoints');
 
@@ -89,7 +93,7 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
 
   console.log('```');
 
-  console.log("console.log(JSON.stringify(creator)) -> \n" + JSON.stringify(creator));
+  console.log("console.log(JSON.stringify(creator, null, 2)) -> \n" + JSON.stringify(creator, null, 2));
 
   console.log('```');
 
@@ -101,7 +105,7 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
 
   console.log('```');
 
-  console.log("console.log(JSON.stringify(author)) -> \n" + JSON.stringify(author));
+  console.log("console.log(JSON.stringify(author, null, 2)) -> \n" + JSON.stringify(author, null, 2));
 
   console.log('```');
 
