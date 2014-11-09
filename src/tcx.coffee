@@ -7,14 +7,6 @@ fs    = require('fs')
 
 root = exports ? this
 
-class Entry
-
-  constructor: (tag, path, attrs) ->
-    this.add_value('type', attrs.type)
-    this.add_value('path', path)
-    for n,v of attrs
-      this[n] = v
-
 class Parser
 
   @VERSION: '0.0.1'
@@ -120,6 +112,10 @@ class Parser
 
     @parser.on('error', (error) =>
       console.log('error ' + JSON.stringify(error)))
+
+
+  a: ->
+    @activity
 
   parse_file: (filename) =>
     xml_str = fs.readFileSync(filename)
