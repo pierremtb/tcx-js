@@ -98,8 +98,9 @@ console.log(JSON.stringify(trackpoints[trackpoints.length - 1], null, 2)) ->
 
 #### Parse, with Augmented Calculated fields
 
-tcx-js will optionally calculate and add the 'alt_feet' and 'dist_miles' fields to
-each trackpoint, if you configure the parser as follows:
+tcx-js will optionally calculate and add the 'alt_feet', 'dist_miles',
+'elapsed_sec', and 'elapsed_hhmmss' fields to each trackpoint if you configure
+the parser as follows:
 
 ```
 opts = {}

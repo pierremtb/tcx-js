@@ -77,8 +77,9 @@ console.log('')
 
 console.log('#### Parse, with Augmented Calculated fields')
 console.log('')
-console.log("tcx-js will optionally calculate and add the 'alt_feet' and 'dist_miles' fields to ")
-console.log('each trackpoint, if you configure the parser as follows: ')
+console.log("tcx-js will optionally calculate and add the 'alt_feet', 'dist_miles', ")
+console.log("'elapsed_sec', and 'elapsed_hhmmss' fields to each trackpoint if you configure ")
+console.log('the parser as follows: ')
 console.log('')
 
 opts = {}
