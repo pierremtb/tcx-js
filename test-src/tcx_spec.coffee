@@ -8,18 +8,18 @@ pkg = require('../package.json')
 describe 'tcx.Parser', ->
 
   it 'defines VERSION in both the code and package.json files', ->
-    expected = '0.1.1'
+    expected = '0.1.2'
     code_version = tcx.Parser.VERSION
     pkg_version  = pkg.version
     expect(code_version).toBe(expected)
     expect(code_version).toBe(expected)
+    expect(code_version).toBe(pkg_version)
 
   it 'defines constants related to its calculations, such as METERS_PER_MILE', ->
     expect(tcx.Parser.FEET_PER_METER).toBe(3.280839895013123)
     expect(tcx.Parser.METERS_PER_MILE).toBe(1609.344)
 
   it 'parses the Twin Cities Marathon sample data, quickly', ->
-
     start_ms = (new Date()).getTime()
     parser   = new tcx.Parser()
     parser.parse_file('data/activity_twin_cities_marathon.tcx')
@@ -81,6 +81,7 @@ describe 'tcx.Parser', ->
     opts = {}
     opts.alt_feet = true
     opts.dist_miles = true
+    opts.elapsed = true
 
     start_ms = (new Date()).getTime()
     parser   = new tcx.Parser(opts)
@@ -105,3 +106,5 @@ describe 'tcx.Parser', ->
     expect(t.run_cadence).toBe('77')
     expect(t.alt_feet).toBe(853.018372703412)
     expect(t.dist_miles).toBe(26.492439912628996)
+    expect(t.elapsed_sec).toBe(15264)
+    expect(t.elapsed_hhmmss).toBe("04:14:24")

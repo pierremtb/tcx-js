@@ -13,11 +13,12 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
   describe('tcx.Parser', function() {
     it('defines VERSION in both the code and package.json files', function() {
       var code_version, expected, pkg_version;
-      expected = '0.1.1';
+      expected = '0.1.2';
       code_version = tcx.Parser.VERSION;
       pkg_version = pkg.version;
       expect(code_version).toBe(expected);
-      return expect(code_version).toBe(expected);
+      expect(code_version).toBe(expected);
+      return expect(code_version).toBe(pkg_version);
     });
     it('defines constants related to its calculations, such as METERS_PER_MILE', function() {
       expect(tcx.Parser.FEET_PER_METER).toBe(3.280839895013123);
@@ -76,6 +77,7 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
       opts = {};
       opts.alt_feet = true;
       opts.dist_miles = true;
+      opts.elapsed = true;
       start_ms = (new Date()).getTime();
       parser = new tcx.Parser(opts);
       parser.parse_file('data/activity_twin_cities_marathon.tcx');
@@ -94,7 +96,9 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
       expect(t.hr_bpm).toBe('161');
       expect(t.run_cadence).toBe('77');
       expect(t.alt_feet).toBe(853.018372703412);
-      return expect(t.dist_miles).toBe(26.492439912628996);
+      expect(t.dist_miles).toBe(26.492439912628996);
+      expect(t.elapsed_sec).toBe(15264);
+      return expect(t.elapsed_hhmmss).toBe("04:14:24");
     });
   });
 

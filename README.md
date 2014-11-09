@@ -4,6 +4,8 @@
 
 A Node.js library for parsing TCX/XML files, such as from a Garmin GPS device.
 
+Optionally provides additional calculated Trackpoint fields.
+
 ### Examples
 
 #### Setup
@@ -101,8 +103,9 @@ each trackpoint, if you configure the parser as follows:
 
 ```
 opts = {}
-opts.alt_feet = true
+opts.alt_feet   = true
 opts.dist_miles = true
+opts.elapsed    = true  # this will add two fields - elapsed_sec and elapsed_hhmmss
 
 p2 = new tcx.Parser(opts)
 p2.parse_file("data/activity_twin_cities_marathon.tcx")
@@ -119,20 +122,23 @@ console.log(JSON.stringify(t2[t2.length - 1], null, 2)) ->
   "run_cadence": "77",
   "seq": 2256,
   "alt_feet": 853.018372703412,
-  "dist_miles": 26.492439912628996
+  "dist_miles": 26.492439912628996,
+  "elapsed_sec": 15264,
+  "elapsed_hhmmss": "04:14:24"
 }
 ```
 
 The version number of this library, and other constant values, can be determined at runtime.
 
 ```
-Parser.VERSION         -> 0.1.1
+Parser.VERSION         -> 0.1.2
 Parser.FEET_PER_METER  -> 3.280839895013123
 Parser.METERS_PER_MILE -> 1609.344
 ```
 
 ### Release History
 
+* 2014-11-09   v0.1.2  Added optional calculated Trackpoint fields 'elapsed_sec' and 'elapsed_hhmmss'.
 * 2014-11-09   v0.1.1  Added optional calculated Trackpoint fields 'alt_feet' and 'dist_miles'.
 * 2014-11-09   v0.1.0  Initial working version.
 * 2014-11-09   v0.0.1  alpha 1

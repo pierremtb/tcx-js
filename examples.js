@@ -7,9 +7,11 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
  */
 
 (function() {
-  var a2, activity, author, creator, filename, fs, opts, p2, parser, t2, tcx, trackpoints;
+  var a2, activity, author, creator, filename, fs, m26, opts, p2, parser, t2, tcx, trackpoints;
 
   fs = require('fs');
+
+  m26 = require("m26-js");
 
   tcx = require("./lib/tcx.js");
 
@@ -147,6 +149,8 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
 
   opts.dist_miles = true;
 
+  opts.elapsed = true;
+
   p2 = new tcx.Parser(opts);
 
   p2.parse_file("data/activity_twin_cities_marathon.tcx");
@@ -159,9 +163,11 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
 
   console.log('opts = {}');
 
-  console.log('opts.alt_feet = true');
+  console.log('opts.alt_feet   = true');
 
   console.log('opts.dist_miles = true');
+
+  console.log('opts.elapsed    = true  # this will add two fields - elapsed_sec and elapsed_hhmmss');
 
   console.log('');
 
@@ -197,6 +203,6 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
 
   filename = 'data/activity_twin_cities_marathon.json';
 
-  fs.writeFileSync(filename, JSON.stringify(parser.activity, null, 2));
+  fs.writeFileSync(filename, JSON.stringify(a2, null, 2));
 
 }).call(this);

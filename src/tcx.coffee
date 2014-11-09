@@ -4,12 +4,13 @@ Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail
 
 expat = require('node-expat')
 fs    = require('fs')
+m26   = require("m26-js")
 
 root = exports ? this
 
 class Parser
 
-  @VERSION:        '0.1.1'
+  @VERSION:        '0.1.2'
   @FEET_PER_METER:  3.280839895013123
   @METERS_PER_MILE: 1609.344
 
@@ -23,6 +24,8 @@ class Parser
     @curr_tag    = undefined
     @curr_text   = ''
     @curr_tkpt   = undefined
+    @tkpt0_time  = undefined
+    @tkpt0_date  = undefined
 
     # @activity contains the parsed data:
     @activity = {}
@@ -133,6 +136,10 @@ class Parser
 
   finish: ->
     # Augment the parsed Trackpoint data with calculated fields
+    if @activity.trackpoints.length > 0
+      @tkpt0_time = @activity.trackpoints[0].time
+      @tkpt0_date = new Date(@tkpt0_time)
+
     for tkpt, idx in @activity.trackpoints
       tkpt.seq = idx + 1
       if @options.alt_feet == true
@@ -141,5 +148,12 @@ class Parser
       if @options.dist_miles == true
         distm = Number(tkpt.dist_meters)
         tkpt.dist_miles = distm / Parser.METERS_PER_MILE
+      if @options.elapsed == true
+        if @tkpt0_time
+          dt  = new Date(tkpt.time)
+          sec = (dt - @tkpt0_date) / 1000.0
+          et  = new m26.ElapsedTime(sec)
+          tkpt.elapsed_sec = sec
+          tkpt.elapsed_hhmmss = et.as_hhmmss()
 
 root.Parser = Parser
