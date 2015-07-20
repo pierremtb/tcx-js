@@ -4,6 +4,8 @@ logs
 
 *.tgz
 
+txt_merged.txt
+
 # Runtime data
 pids
 *.pid

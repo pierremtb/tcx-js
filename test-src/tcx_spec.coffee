@@ -1,5 +1,5 @@
 ###
-Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail.com>
+Copyright 2015, Christopher Joakim <christopher.joakim@gmail.com>
 ###
 
 tcx = require('../lib/tcx.js')
@@ -8,7 +8,7 @@ pkg = require('../package.json')
 describe 'tcx.Parser', ->
 
   it 'defines VERSION in both the code and package.json files', ->
-    expected = '0.1.2'
+    expected = '0.1.3'
     code_version = tcx.Parser.VERSION
     pkg_version  = pkg.version
     expect(code_version).toBe(expected)

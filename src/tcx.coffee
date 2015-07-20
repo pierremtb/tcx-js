@@ -1,5 +1,5 @@
 ###
-Copyright 2014, Christopher Joakim, JoakimSoftware LLC <christopher.joakim@gmail.com>
+Copyright 2015, Christopher Joakim <christopher.joakim@gmail.com>
 ###
 
 expat = require('node-expat')
@@ -10,7 +10,7 @@ root = exports ? this
 
 class Parser
 
-  @VERSION:        '0.1.2'
+  @VERSION:        '0.1.3'
   @FEET_PER_METER:  3.280839895013123
   @METERS_PER_MILE: 1609.344
 
@@ -152,7 +152,7 @@ class Parser
         if @tkpt0_time
           dt  = new Date(tkpt.time)
           sec = (dt - @tkpt0_date) / 1000.0
-          et  = new m26.ElapsedTime(sec)
+          et  = new m26.M26ElapsedTime(sec)
           tkpt.elapsed_sec = sec
           tkpt.elapsed_hhmmss = et.as_hhmmss()
 
