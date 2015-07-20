@@ -8,9 +8,10 @@ module.exports = function (grunt) {
           join: true
         },
         files: {
-          'lib/tcx.js':                  ['src/*.coffee'],
-          'spec/tcx_spec.js':            ['test-src/tcx_spec.coffee'],
-          'examples.js':                 ['test-src/examples.coffee']
+          'lib/tcx.js':         ['src/*.coffee'],
+          'spec/tcx_spec.js':   ['test-src/tcx_spec.coffee'],
+          'demo.js':            ['test-src/demo.coffee'],
+          'examples.js':        ['test-src/examples.coffee']
         }
       }
     }
